@@ -11,3 +11,12 @@
 *.lai
 *.la
 *.a
+
+# Other
+*.layout
+*.xml
+*.cbp
+*.project
+*.out.*
+*.depend
+bin
