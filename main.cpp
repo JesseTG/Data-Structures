@@ -6,17 +6,31 @@
  */
 
 #include <iostream>
+#include "vector.h"
 #include "list.h"
 #include "tree.h"
+#include "iterator.h"
 using std::cout;
 using std::endl;
 
+//Vector
+int main()
+{
+    Vector<int> the_vector;
+    the_vector.append(16);
+    the_vector.append(45);
+    the_vector.append(128);
 
+    cout << *the_vector.getFirst() << endl << *(the_vector.getFirst() + 1) << endl << *(the_vector.getFirst() + 2) << endl;
+}
+
+
+
+/*
 //List
 int main()
 {
     List<int> the_list;
-    List<int> other   ;
     the_list.append(5);
     the_list.append(6);
     the_list.append(30);
@@ -31,6 +45,7 @@ int main()
         temp = temp->next;
     }
 }
+*/
 
 
 /*

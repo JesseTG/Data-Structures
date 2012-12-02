@@ -10,8 +10,7 @@ struct TreeNode
     TreeNode(TreeNode<K, E>* p, TreeNode<K, E>* l, TreeNode<K, E>* r, K& k, E& e) :
         parent(p), left(l), right(r), key(k), element(e) {};
 
-    bool isLeaf() const
-        { return (left == nullptr) && (right == nullptr); }
+    bool isLeaf() const { return (left == nullptr) && (right == nullptr); }
 
     TreeNode<K, E>* parent;
     K key                 ;

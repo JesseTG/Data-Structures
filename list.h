@@ -8,9 +8,8 @@
 #ifndef LIST_H_
 #define LIST_H_
 
-#define SWAP(x, y) auto temp = (x); x = (y); y = temp
-
 #include <iostream>
+#include "sequence.h"
 
 template<class T>
 struct Node
@@ -23,8 +22,9 @@ struct Node
     Node<T>* next   ;
 };
 
+
 template<class T>
-class List
+class List : public Sequence<T>
 {
     public:
         List() : head(nullptr), tail(nullptr) {};
@@ -37,8 +37,8 @@ class List
         void pop_tail()                 ;
         void pop_head()                 ;
         void prepend(const T&)          ;
-        void remove(const int)          ;
-        void reverse()                  ;
+        void remove(const int)   {}       ;
+        void reverse() {}                 ;
         void swap(const int, const int) ;
 
         bool has(const T&) const;
@@ -51,9 +51,11 @@ class List
             return size;
         }
 
+        T&  get(const int pos) const        { return getNode(pos)->element; }
         T&  operator[](int pos)             { return get(pos);              }
         T&  operator[](const int pos) const { return get(pos);              }
-        T&  get(const int pos)              { return getNode(pos)->element; }
+
+
 
         Node<T>* getFirst() { return head; }
         Node<T>* getLast()  { return tail; }
@@ -67,7 +69,7 @@ class List
             tail = head;
         }
 
-        Node<T>* getNode(const int pos) {
+        Node<T>* getNode(const int pos) const {
             Node<T>* node = head;
             for (int i = 0; i < pos; ++i, node = node->next);
             return node;
@@ -154,10 +156,11 @@ void List<T>::pop_tail()
 template<class T>
 void List<T>::insert(const T& element, const int pos)
 {
-    if (pos == 0 || pos == size) {
+    int s = size();
+    if (pos == 0 || pos == s) {
     //If the given position is the first or last element...
         if      (pos == 0)    prepend(element);
-        else if (pos == size) append(element);
+        else if (pos == s) append(element);
     }
     else {
         Node<T>* node       = getNode(pos);
@@ -175,7 +178,7 @@ void List<T>::swap(const int pos1, const int pos2)
     Node<T>* node1 = getNode(pos1);
     Node<T>* node2 = getNode(pos2);
 
-    Node<T> temp = node1;
+    Node<T>* temp = node1;
 
     node1->prev->next = node2;
     node1->next->prev = node2;
