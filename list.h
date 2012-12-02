@@ -11,6 +11,9 @@
 #include <iostream>
 #include "sequence.h"
 
+#define SWAP(a, b) decltype(a) temp = (a); a = (b); b = temp
+//I should replace this with a function that takes in nodes.
+
 template<class T>
 struct Node
 {
@@ -37,13 +40,11 @@ class List : public Sequence<T>
         void pop_tail()                 ;
         void pop_head()                 ;
         void prepend(const T&)          ;
-        void remove(const int)   {}       ;
-        void reverse() {}                 ;
+        void remove(const int)   {}     ;
+        void reverse() {}               ;
         void swap(const int, const int) ;
 
         bool has(const T&) const;
-
-        bool empty()  const                 { return head == nullptr;       }
 
         int size() const {
             int size = 0;
@@ -51,11 +52,12 @@ class List : public Sequence<T>
             return size;
         }
 
+        bool empty()  const                 { return head == nullptr;       }
         T&  get(const int pos) const        { return getNode(pos)->element; }
         T&  operator[](int pos)             { return get(pos);              }
         T&  operator[](const int pos) const { return get(pos);              }
 
-
+        void bubbleSort();
 
         Node<T>* getFirst() { return head; }
         Node<T>* getLast()  { return tail; }
@@ -175,7 +177,12 @@ void List<T>::swap(const int pos1, const int pos2)
 {
     if (pos1 == pos2) return;
 
-    Node<T>* node1 = getNode(pos1);
+    //Quick hack; gonna work on making this the right way later
+    T temp = get(pos1);
+    operator[](pos1) = get(pos2);
+    operator[](pos2) = temp;
+
+    /*Node<T>* node1 = getNode(pos1);
     Node<T>* node2 = getNode(pos2);
 
     Node<T>* temp = node1;
@@ -194,7 +201,22 @@ void List<T>::swap(const int pos1, const int pos2)
 
     node2->prev = temp->prev;
     node2->next = temp->next;
-    //Reroute node2
+    //Reroute node2*/
+}
+
+template<class T>
+void List<T>::bubbleSort()
+{
+    for (Node<T>* i = head; i != tail; i = i->next) {
+        bool swapped = false;
+        for (Node<T>* j = tail; j != i; j = j->prev) {
+            if (j->element < j->prev->element) {
+                SWAP(j->element, j->prev->element);
+                swapped = true;
+            }
+            if (!swapped) break;
+        }
+    }
 }
 
 #endif /* LIST_H_ */

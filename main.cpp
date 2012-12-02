@@ -13,6 +13,7 @@
 using std::cout;
 using std::endl;
 
+/*
 //Vector
 int main()
 {
@@ -27,10 +28,10 @@ int main()
 
     cout << *the_vector.getFirst() << endl << *(the_vector.getFirst() + 1) << endl << *(the_vector.getFirst() + 2) << endl;
 }
+*/
 
 
 
-/*
 //List
 int main()
 {
@@ -41,7 +42,7 @@ int main()
     the_list.append(41);
     the_list.append(233);
     the_list.append(80);
-    the_list.swap(1, 4);
+    the_list.bubbleSort();
 
     Node<int>* temp = the_list.getFirst();
     while (temp != nullptr) {
@@ -49,7 +50,7 @@ int main()
         temp = temp->next;
     }
 }
-*/
+
 
 
 /*
