@@ -16,10 +16,14 @@ using std::endl;
 //Vector
 int main()
 {
-    Vector<int> the_vector;
+    Vector<int32_t> the_vector;
+
     the_vector.append(16);
     the_vector.append(45);
     the_vector.append(128);
+    the_vector.append(31);
+
+    cout << "Size: " << the_vector.size() << endl;
 
     cout << *the_vector.getFirst() << endl << *(the_vector.getFirst() + 1) << endl << *(the_vector.getFirst() + 2) << endl;
 }
